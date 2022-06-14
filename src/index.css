@@ -151,6 +151,6 @@ ul {
   }
 }
 
-.hideDetails {
-  display: none;
+.filter {
+  margin: 2%;
 }

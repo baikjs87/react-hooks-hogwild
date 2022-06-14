@@ -5,29 +5,15 @@ import Filter from "./Filter"
 import hogs from "../porkers_data"
 
 function App() {
-	const [newHogs, setNewHogs] = useState(hogs)
+	const [greased, setGreased] = useState(false)
+	const [sort, setSort] = useState("")
 
-	function onChangeGreased(e){
-		const filterGreasedHogs = e.target.value === "Yes" ?
-		newHogs.filter((hog) => hog.greased != false) : newHogs
-		setNewHogs(filterGreasedHogs)
+	function onChangeGreased() {
+		setGreased(!greased)
 	}
 
-	function onChangeName(e){
-		const alphabeticalHogs = e.target.value !== "None" ? newHogs.sort(function(a, b) {
-			return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0
-		}) : newHogs
-		console.log(alphabeticalHogs)
-		setNewHogs(alphabeticalHogs)
-	}
-
-	function onChangeWeight(e){
-		let sortable = []
-		for (let hog in newHogs) {
-			sortable.push(hog, newHogs[hog])
-		}
-		sortable.sort(function(a, b) { return a[1] - b[1]})
-		setNewHogs(sortable)
+	function onChangeSort(e) {
+		setSort(e.target.textContent)
 	}
 
 	return (
@@ -35,10 +21,9 @@ function App() {
 			<Nav />
 			<Filter
 				onChangeGreased={onChangeGreased}
-				onChangeName={onChangeName}
-				onChangeWeight={onChangeWeight}
+				onChangeSort={onChangeSort}
 			/>
-			<PigsTilesContainer hogs={newHogs} />
+			<PigsTilesContainer hogs={hogs} greased={greased} sort={sort} />
 		</div>
 	)
 }

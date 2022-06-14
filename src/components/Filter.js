@@ -1,25 +1,28 @@
 import React from "react"
+import { Checkbox, Dropdown } from "semantic-ui-react"
 
-function Filter({ onChangeGreased, onChangeName, onChangeWeight }) {
+function Filter({ onChangeGreased, onChangeSort }) {
+	const options = [
+		{ key: "name", text: "Name", value: "name" },
+		{ key: "weight", text: "Weight", value: "weight" },
+	]
 	return (
-		<div className = "filterWrapper">
-            <h3 className="smallHeader">Filter Hogs</h3>
-			<p className="hoggyText ">Greased?</p>
-            <select onChange={onChangeGreased}>
-                <option value="All">All</option>
-                <option value="Yes">Yes</option>
-            </select>
-            <p className="hoggyText">Sort By</p>
-            <select onChange={onChangeName}>
-                <option value="Name">Name</option>
-                <option value="Ascending">Ascending</option>
-                <option value="Descending">Descending</option>
-            </select>
-            <select onChange={onChangeWeight}>
-                <option value="Weight">Weight</option>
-                <option value="Ascending">Ascending</option>
-                <option value="Descending">Descending</option>
-            </select>
+		<div className="filterWrapper">
+			<h3>Filter Hogs</h3>
+			<Checkbox
+				toggle
+				label="Greased?"
+				className="largeHeader filter"
+				onClick={onChangeGreased}
+			/>
+			{/* <h4>Sort By:</h4> */}
+			<Dropdown
+				placeholder="Sort By"
+				search
+				selection
+				options={options}
+				onChange={onChangeSort}
+			/>
 		</div>
 	)
 }
